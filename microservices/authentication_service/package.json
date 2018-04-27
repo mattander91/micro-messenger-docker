@@ -21,11 +21,8 @@
     "artillery": "^1.6.0-13",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
-    "cookie-parser": "^1.4.3",
-    "cookie-session": "^2.0.0-beta.3",
     "cors": "^2.8.4",
     "express": "^4.16.2",
-    "express-session": "^1.15.6",
     "jquery": "^3.2.1",
     "mongoose": "^4.13.7",
     "request": "^2.83.0"

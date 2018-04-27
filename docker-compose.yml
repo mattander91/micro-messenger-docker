@@ -6,7 +6,7 @@ services:
     command: npm run start
     build: ./microservices/web_service/client
     ports:
-      - 3001:3000
+      - 3000:3000
     networks:
       - webnet
 
@@ -23,7 +23,7 @@ services:
         condition: on-failure
     build: ./microservices/authentication_service
     ports:
-      - "3002:3000"
+      - "3001:3000"
     depends_on:
       - mongodb
     environment:
@@ -43,7 +43,7 @@ services:
         condition: on-failure
     build: ./microservices/group_service
     ports:
-      - "3003:3000"
+      - "3002:3000"
     depends_on:
       - mongodb
     environment:
@@ -63,7 +63,7 @@ services:
         condition: on-failure
     build: ./microservices/message_service
     ports:
-      - "3004:3000"
+      - "3003:3000"
     depends_on:
       - mongodb
     environment:

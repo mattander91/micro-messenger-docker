@@ -37,7 +37,7 @@ class SignUp extends React.Component {
     }
     $.ajax({
       type: 'POST',
-      url: 'http://127.0.0.1:3001/signUp',
+      url: 'http://0.0.0.0:3001/signUp',
       data: newUser,
       success: () => {
         sessionStorage.setItem('user', this.state.newUserName);
@@ -50,29 +50,27 @@ class SignUp extends React.Component {
     });
   }
 
-
-
-render() {
-  return (
-    <div className="accountForm">
-      <form onSubmit={this.signupNewUser}>
-        <p>Enter Username: </p>
-        <input onChange={(event) => {
-          this.handleNewUsername(event)}
-        }/>
-        <p>Enter Password</p>
-        <input onChange={(event) => {
-          this.handleNewPassword(event)}
-        }/>
-        <p></p>
-        <button>Sign Up</button>
-        <form onSubmit={this.props.handleHome}>
-          <button>Home</button>
+  render() {
+    return (
+      <div className="accountForm">
+        <form onSubmit={this.signupNewUser}>
+          <p>Enter Username: </p>
+          <input onChange={(event) => {
+            this.handleNewUsername(event)}
+          }/>
+          <p>Enter Password</p>
+          <input onChange={(event) => {
+            this.handleNewPassword(event)}
+          }/>
+          <p></p>
+          <button>Sign Up</button>
+          <form onSubmit={this.props.handleHome}>
+            <button>Home</button>
+          </form>
         </form>
-      </form>
-    </div>
-  );
- }
+      </div>
+    );
+   }
 }
 
 export default SignUp;

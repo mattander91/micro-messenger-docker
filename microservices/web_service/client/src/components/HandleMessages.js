@@ -31,7 +31,7 @@ class HandleMessages extends React.Component {
     }
     $.ajax({
       type: 'POST',
-      url: 'http://127.0.0.1:3003/message',
+      url: 'http://0.0.0.0:3003/message',
       data: messageObj,
       success: (data) => {
         console.log('POST successful');

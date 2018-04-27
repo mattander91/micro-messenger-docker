@@ -1,9 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 const UsersModel = require('../database/index.js');
 const cors = require('cors');
-
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
@@ -22,7 +20,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-let port = process.env.PORT || 3001;
+let port = 3000;
 
 // check if the service is running
 app.get('/', (req, res) => {

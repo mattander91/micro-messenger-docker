@@ -1,10 +1,7 @@
-
 const express = require('express');
 const bodyParser = require('body-parser');
-
 const MessagesModel = require('../database/index.js');
 const cors = require('cors');
-
 let app = express();
 
 app.use(cors());
@@ -17,8 +14,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-let port = process.env.PORT || 3003;
+let port = 3000;
 
 // test if the service is running
 app.get('/', (req, res) => {

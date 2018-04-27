@@ -36,7 +36,7 @@ class Login extends React.Component {
     }
     $.ajax({
       type: 'POST',
-      url: 'http://127.0.0.1:3001/login',
+      url: 'http://0.0.0.0:3001/login',
       data: user,
       success: () => {
         sessionStorage.setItem('user', this.state.loginUsername);

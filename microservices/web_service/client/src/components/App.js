@@ -30,17 +30,15 @@ class App extends React.Component {
 
 /*###################################*/
 
-
   componentDidMount() {
     this.setUser();
     this.fetchGroups();
   }
 
-
   fetchMessagesFromClick(groupName) {
     $.ajax({
       type: 'GET',
-      url: 'http://127.0.0.1:3003/getMessages',
+      url: 'http://0.0.0.0:3003/getMessages',
       data: {groupName: groupName},
       success: (fetchedMessages) => {
         this.setState({
@@ -54,11 +52,10 @@ class App extends React.Component {
     });
   }
 
-
   fetchGroups() {
     $.ajax({
       type: 'GET',
-      url: 'http://127.0.0.1:3002/getGroups',
+      url: 'http://0.0.0.0:3002/getGroups',
       success: (data) => {
         this.setState({
           groups: data
@@ -70,11 +67,10 @@ class App extends React.Component {
     });
   }
 
-
   deleteMessages(groupName) {
     $.ajax({
       type: 'DELETE',
-      url: 'http://127.0.0.1:3003/deleteMessages',
+      url: 'http://0.0.0.0:3003/deleteMessages',
       data: {groupName: groupName},
       success: () => {
         this.setState({
