@@ -1,4 +1,5 @@
-# https://artillery.io/docs/script-reference/
+# cd into this directory and run: artillery run -e dev loadTest.yml
+
 config:
   payload: #for csv files
     path: "messages.csv"
@@ -10,10 +11,10 @@ config:
 
   environments: #for re-use across different environments (dev, staging, production)
     dev: #command line: artillery run -e dev loadTest.yml
-      target: "http://192.168.99.100:3004"  #"http://0.0.0.0:3004"
+      target: "http://0.0.0.0:3003"
       phases:
         - duration: 5 # seconds to run test
-          arrivalRate: 1000 # number of virtual users per second
+          arrivalRate: 5 # number of virtual users per second
 
 scenarios:
   - name: 'Add messages'

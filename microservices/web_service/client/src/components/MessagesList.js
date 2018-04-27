@@ -10,7 +10,7 @@ const MessagesList = (props) => {
       }
       </div>
         {props.messages.map(message =>
-          message.username === props.user && props.user !== false
+          message.username === props.user && props.user !== ''
             ? <div className="bubble me">Message from {message.username}: {message.message}</div>
             : <div className="bubble you">Message from {message.username}: {message.message}</div>
         )}

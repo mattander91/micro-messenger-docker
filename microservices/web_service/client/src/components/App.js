@@ -93,8 +93,7 @@ class App extends React.Component {
   handleLogout() {
     sessionStorage.removeItem('user');
     this.setState({
-      currentUser: '',
-      loggedIn: false
+      currentUser: ''
     });
   }
 
@@ -108,8 +107,7 @@ class App extends React.Component {
 
   handleLoginClick() {
     this.setState({
-      currentState: 'login',
-      loggedIn: true
+      currentState: 'login'
     });
   }
 
