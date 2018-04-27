@@ -9,18 +9,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mattander91/micro_messenger.git"
+    "url": "git+https://github.com/mattander91/micro-messenger.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mattander91/micro_messenger.git/issues"
+    "url": "https://github.com/mattander91/micro-messenger/issues"
   },
-  "homepage": "https://github.com/mattander91/micro_messenger.git#readme",
+  "homepage": "https://github.com/mattander91/micro-messenger#readme",
   "dependencies": {
     "artillery": "^1.6.0-13",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-beta.3",
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "express-session": "^1.15.6",

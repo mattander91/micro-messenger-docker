@@ -1,11 +1,11 @@
 const MessagesModel = require('../database/index.js');
 
-function addMessage(username, message) {
-  var newMessage = new MessagesModel({
+let addMessage = (username, message) => {
+  let newMessage = new MessagesModel({
     username: username,
     message: message
   });
-  newMessage.save(function(err) {
+  newMessage.save(err => {
     if (err) {
       console.log('error: ', err);
     } else {

@@ -1,10 +1,10 @@
 const GroupsModel = require('../database/index.js');
 
-function addGroup(groupName) {
-  var groupMongoInstance = new GroupsModel({
+let addGroup = (groupName) => {
+  let groupMongoInstance = new GroupsModel({
     name: groupName
   });
-  groupMongoInstance.save(function(err) {
+  groupMongoInstance.save(err => {
     if (err) {
       console.log('error: ', err);
     } else {
@@ -13,9 +13,9 @@ function addGroup(groupName) {
   });
 };
 
-function addMember(groupName, memberName, memberId) {
-  var memberObj = {member: memberName, ID: memberId};
-  GroupsModel.update({name: groupName}, {$addToSet: {members: memberObj}}, function(err, data) {
+let addMember = (groupName, memberName, memberId) => {
+  let memberObj = {member: memberName, ID: memberId};
+  GroupsModel.update({name: groupName}, {$addToSet: {members: memberObj}}, (err, data) => {
     if (err) {
       console.log('error: ', err);
     } else {
@@ -24,8 +24,8 @@ function addMember(groupName, memberName, memberId) {
   });
 };
 
-function removeMember(groupName, memberId) {
-  GroupsModel.update({name: groupName}, {$pull: {members: {ID: memberId}}}, function(err, data) {
+let removeMember = (groupName, memberId) => {
+  GroupsModel.update({name: groupName}, {$pull: {members: {ID: memberId}}}, (err, data) => {
     if (err) {
       console.log('error: ', err);
     } else {
@@ -34,8 +34,8 @@ function removeMember(groupName, memberId) {
   });
 };
 
-function removeGroupAndMembers(groupName) {
-  GroupsModel.remove({name: groupName}, function(err, data) {
+let removeGroupAndMembers = (groupName) => {
+  GroupsModel.remove({name: groupName}, (err, data) => {
     if (err) {
       console.log('error: ', err);
     } else {

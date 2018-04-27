@@ -1,5 +1,5 @@
 {
-  "name": "micro_messenger",
+  "name": "micro-messenger",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mattander91/micro_messenger.git"
+    "url": "git+https://github.com/mattander91/micro-messenger.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mattander91/micro_messenger/issues"
+    "url": "https://github.com/mattander91/micro-messenger/issues"
   },
-  "homepage": "https://github.com/mattander91/micro_messenger#readme",
+  "homepage": "https://github.com/mattander91/micro-messenger#readme",
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

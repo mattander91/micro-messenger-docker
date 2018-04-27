@@ -2,7 +2,7 @@ version: "3"
 services:
 
   web_frontend:
-    image: zitherly_frontend
+    image: micro_frontend
     command: npm run start
     build: ./microservices/web_service/client
     ports:
@@ -27,7 +27,7 @@ services:
     depends_on:
       - mongodb
     environment:
-      - MONGO_DB_URI=mongodb://mongodb/zitherly_users
+      - MONGO_DB_URI=mongodb://mongodb/micro_users
     networks:
       - webnet
 
@@ -47,7 +47,7 @@ services:
     depends_on:
       - mongodb
     environment:
-      - MONGO_DB_URI=mongodb://mongodb/zitherly_groups
+      - MONGO_DB_URI=mongodb://mongodb/micro_groups
     networks:
       - webnet
 
@@ -67,7 +67,7 @@ services:
     depends_on:
       - mongodb
     environment:
-      - MONGO_DB_URI=mongodb://mongodb/zitherly_messages
+      - MONGO_DB_URI=mongodb://mongodb/micro_messages
     networks:
       - webnet
 

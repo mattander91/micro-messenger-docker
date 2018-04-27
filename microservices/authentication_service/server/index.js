@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const cookieParser = require('cookie-parser');
 const UsersModel = require('../database/index.js');
 const helpers = require('./helpers.js');
 const cors = require('cors');
@@ -9,52 +9,40 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 
-var session = require('express-session');
-
 let app = express();
 
-
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    maxAge: 600000
-  }
-}));
-
 app.use(cors());
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Credentials', true);
   next();
 });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-let port = 3000;
-
+let port = process.env.PORT || 3001;
 
 // check if the service is running
-app.get('/', function(req, res) {
-  console.log('Auth service is running');
-  var username = req.session.user;
-  console.log('session user: ', username);
-  res.send('Auth service is running')
+app.get('/', (req, res) => {
+  res.status(200);
+  console.log('authentication running');
+  res.send('authentication service running');
 });
 
+
 //signs up new member
-app.post('/signup', function(req, res) {
-  var name = req.body.username;
-  var pass = req.body.password;
-  var hash = bcrypt.hashSync(pass, salt);
-  var newUser = new UsersModel({
+app.post('/signup', (req, res) => {
+  let name = req.body.username;
+  let pass = req.body.password;
+  let hash = bcrypt.hashSync(pass, salt);
+  let newUser = new UsersModel({
     username: name,
     password: hash
   });
-  newUser.save(function(err) {
+  newUser.save(err => {
     if (err) {
       console.log('error ' + err);
       res.sendStatus(500);
@@ -67,30 +55,31 @@ app.post('/signup', function(req, res) {
 
 
 //logs in user
-app.post('/login', function(req, res) {
-  var username = req.body.loginUsername;
-  var password = req.body.loginPassword;
-  UsersModel.findOne({username: username}, function(err, result) {
+app.post('/login', (req, res) => {
+  let username = req.body.loginUsername;
+  let password = req.body.loginPassword;
+  UsersModel.findOne({username: username}, (err, data) => {
     if (err) {
       console.log('error: ', err);
+    } else {
+      let passwordCompare = data.password;
+      bcrypt.compare(password, passwordCompare, (err, match) => {
+        if (match) {
+          console.log('match: ', match);
+          res.sendStatus(201);
+        } else {
+          console.log('user not found/invalid credentials');
+          res.sendStatus(500);
+        }
+      });
     }
-    var passwordCompare = result.password;
-    bcrypt.compare(password, passwordCompare, function(err, match) {
-      if (match) {
-        console.log('user found ', match);
-        req.session.user = username;
-        res.sendStatus(200);
-      } else {
-        console.log('user not found/invalid credentials');
-        res.sendStatus(500);
-      }
-    });
   });
 });
 
-app.post('/logout', function(req, res){
-  console.log('session clearing after logout');
-  req.session.destroy(function(err){
+
+
+app.post('/logout', (req, res) => {
+  req.session.destroy(err => {
     if (err){
       console.log('Failed to destroy session');
       res.sendStatus(500);
@@ -104,9 +93,9 @@ app.post('/logout', function(req, res){
 
 
 //removes user
-app.delete('/deleteUser', function(req, res) {
-  var username = req.body.username;
-  UsersModel.remove({username: username}, function(err, data) {
+app.delete('/deleteUser', (req, res) => {
+  let username = req.body.username;
+  UsersModel.remove({username: username}, (err, data) => {
     if (err) {
       console.log('error: ', err);
       res.sendStatus(500);
@@ -117,6 +106,6 @@ app.delete('/deleteUser', function(req, res) {
   });
 });
 
-app.listen(port, function() {
+app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });

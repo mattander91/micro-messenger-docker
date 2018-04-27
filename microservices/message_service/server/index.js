@@ -9,7 +9,7 @@ const cors = require('cors');
 let app = express();
 
 app.use(cors());
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
@@ -19,50 +19,87 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-let port = 3000;
+let port = process.env.PORT || 3003;
 
 // test if the service is running
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
   console.log('Message service is running');
   res.send('Message service is running')
 });
 
+
 //adds new message
-app.post('/message', function(req, res) {
-  console.log('request received: ', req.body);
-  var username = req.body.username;
-  var message = req.body.message
-  var newMessage = new MessagesModel({
-    username: username,
-    message: message
-  });
-  newMessage.save(function(err) {
+app.post('/message', (req, res) => {
+  let group = req.body.group;
+  let messageObj = {user: req.body.username, message: req.body.message}
+  MessagesModel.findOne({group: group}, (err, data) => {
     if (err) {
-      console.log('error ' + err);
+      console.log('error on message post: ', err);
       res.sendStatus(500);
+    } else if (!data) {
+      let newMessage = new MessagesModel({
+        group: group,
+        messages: messageObj
+      });
+      newMessage.save(err => {
+        if (err) {
+          console.log('error saving new collection: ', err);
+          res.sendStatus(500);
+        } else {
+          console.log('new collection saved');
+          res.sendStatus(201);
+        }
+      });
     } else {
-      console.log('message saved');
-      res.sendStatus(201);
+      MessagesModel.update({group: group}, {$addToSet: {messages: messageObj}}, (err, data) => {
+        if (err) {
+          console.log('error updating collection: ', err);
+        } else {
+          console.log('collection updated');
+          res.sendStatus(201);
+        }
+      });
     }
   });
 });
 
-app.get('/getMessages', function(req, res) {
-  MessagesModel.find({}, function(err, data) {
+
+app.get('/getMessages', (req, res) => {
+  MessagesModel.findOne({group: req.query.groupName}, (err, data) => {
     if (err) {
       console.log('error getting /getMessages: ', err);
       req.sendStatus(500);
-    } else {
+    } else if (data) {
       res.status(200);
-      var messages = data.map(message => {
-        return {message: message.message}
+      let messages = data.messages.map(message => {
+        return {
+          message: message.message,
+          username: message.user
+        }
       });
       res.send(messages);
+    } else {
+      res.status(200);
+      res.send([]);
     }
   });
 });
 
 
-app.listen(port, function() {
+app.delete('/deleteMessages', (req, res) => {
+  let groupName = req.body.groupName;
+  MessagesModel.remove({group: groupName}, (err, data) => {
+    if (err) {
+      console.log('error: ', err);
+      res.sendStatus(500);
+    } else {
+      console.log('messages in ' + groupName + ' removed successfully');
+      res.sendStatus(202);
+    }
+  });
+});
+
+
+app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });

@@ -3,15 +3,14 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 
-function signupMember(username, password) {
-  var username = username;
-  var pass = password;
-  var hash = bcrypt.hashSync(pass, salt);
-  var newUser = new UsersModel({
+let signupMember = (username, password) => {
+  let pass = password;
+  let hash = bcrypt.hashSync(pass, salt);
+  let newUser = new UsersModel({
     username: username,
     password: hash
   });
-  newUser.save(function(err) {
+  newUser.save(err => {
     if (err) {
       console.log('error ' + err);
     } else {
@@ -20,8 +19,8 @@ function signupMember(username, password) {
   });
 };
 
-function deleteMember(username) {
-  UsersModel.remove({username: username}, function(err, data) {
+let deleteMember = (username) => {
+  UsersModel.remove({username: username}, (err, data) => {
     if (err) {
       console.log('error: ', err);
     } else {
@@ -30,13 +29,13 @@ function deleteMember(username) {
   });
 };
 
-function loginMember(username, password) {
-  UsersModel.findOne({username: username}, function(err, result) {
+let loginMember = (username, password) => {
+  UsersModel.findOne({username: username}, (err, result) => {
     if (err) {
       console.log('error: ', err);
     }
-    var passwordCompare = result.password;
-    bcrypt.compare(password, passwordCompare, function(err, match) {
+    let passwordCompare = result.password;
+    bcrypt.compare(password, passwordCompare, (err, match) => {
       if (match) {
         console.log('user found ', match);
       } else {
