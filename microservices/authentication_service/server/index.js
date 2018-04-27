@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const UsersModel = require('../database/index.js');
-const helpers = require('./helpers.js');
 const cors = require('cors');
 
 const bcrypt = require('bcrypt');
@@ -53,8 +52,6 @@ app.post('/signup', (req, res) => {
   });
 });
 
-
-//logs in user
 app.post('/login', (req, res) => {
   let username = req.body.loginUsername;
   let password = req.body.loginPassword;
@@ -72,36 +69,6 @@ app.post('/login', (req, res) => {
           res.sendStatus(500);
         }
       });
-    }
-  });
-});
-
-
-
-app.post('/logout', (req, res) => {
-  req.session.destroy(err => {
-    if (err){
-      console.log('Failed to destroy session');
-      res.sendStatus(500);
-    }
-    else{
-      console.log('session destroyed');
-      res.sendStatus(202);
-    }
-  });
-});
-
-
-//removes user
-app.delete('/deleteUser', (req, res) => {
-  let username = req.body.username;
-  UsersModel.remove({username: username}, (err, data) => {
-    if (err) {
-      console.log('error: ', err);
-      res.sendStatus(500);
-    } else {
-      console.log(username + ' removed successfully');
-      res.sendStatus(202);
     }
   });
 });

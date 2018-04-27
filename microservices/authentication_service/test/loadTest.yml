@@ -14,7 +14,7 @@ config:
       target: "http://0.0.0.0:3000"  #"http://0.0.0.0:3002"
       phases:
         - duration: 5 # load phase lasting 5 seconds
-          arrivalRate: 200   # 200 virtual users per second
+          arrivalRate: 20   # 20 virtual users per second
 
 scenarios:
   - name: 'Add users'

@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const GroupsModel = require('../database/index.js');
-const helpers = require('./helpers.js');
 
 let app = express();
 
@@ -23,8 +22,6 @@ app.get('/', (req, res) => {
   console.log('Group service is running');
   res.send('GroupService is running')
 });
-
-
 
 //adds new group
 app.post('/group', (req, res) => {

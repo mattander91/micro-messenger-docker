@@ -3,7 +3,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const MessagesModel = require('../database/index.js');
-const helpers = require('./helpers.js');
 const cors = require('cors');
 
 let app = express();
