@@ -59,3 +59,4 @@
 # Issues
   Refactor click handling methods on web_service. Condense into one function
   Refactor SignUp.js and Login.js components into one. Refactor form submissions
+  Documentation - add comments to methods, other in each service.

@@ -9,11 +9,9 @@ class HandleGroup extends React.Component {
     this.state = {
       newGroup: ''
     }
-
     this.handleAddGroup = this.handleAddGroup.bind(this);
     this.addNewGroup = this.addNewGroup.bind(this);
     this.deleteGroup = this.deleteGroup.bind(this);
-
   }
 
   handleAddGroup(e) {
@@ -80,6 +78,5 @@ class HandleGroup extends React.Component {
   }
 
 }
-
 
 export default HandleGroup;
