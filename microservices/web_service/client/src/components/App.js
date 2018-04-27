@@ -80,7 +80,6 @@ class App extends React.Component {
     });
   }
 
-
   setUser() {
     this.setState({
       currentUser: sessionStorage.getItem('user')
@@ -97,20 +96,17 @@ class App extends React.Component {
     });
   }
 
-
   handleSignupClick() {
     this.setState({
       currentState: 'signup'
     });
   }
 
-
   handleLoginClick() {
     this.setState({
       currentState: 'login'
     });
   }
-
 
   handleHome() {
     this.setState({
