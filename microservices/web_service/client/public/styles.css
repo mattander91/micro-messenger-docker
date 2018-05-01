@@ -1,3 +1,5 @@
+
+
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600);
 * {
   -moz-box-sizing: border-box;
@@ -58,7 +60,7 @@ body {
 }
 
 .buttons {
-  width: 15%;
+  width: 35%;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -71,7 +73,7 @@ body {
 
 .left {
   float: left;
-  width: 15%;
+  width: 20%;
   height: 700px;
   border: 1px solid #e6e6e6;
   background-color: #fff;
@@ -127,7 +129,7 @@ body {
   position: relative;
   height: fit-content;
   float: left;
-  width: 85%;
+  width: 80%;
   height: 700px;
   border-right: 1px solid #e6e6e6;
   border-bottom: 1px solid #e6e6e6;
@@ -162,7 +164,6 @@ body {
   font-size: 16px;
   height: 40px;
   padding-left: 8px;
-  margin-left: 10px;
   border: 0;
   background-color: #eceff1;
   width: 50%;
@@ -171,6 +172,7 @@ body {
   font-weight: 400;
   position: absolute;
   bottom: 0;
+  left: 250px;
   margin-bottom: 10px;
 }
 
@@ -252,3 +254,32 @@ body {
   margin-bottom: 5px;
 }
 
+.about {
+  margin-left: 10px;
+  margin-top: 25px;
+  line-height: 25px;
+  width: 70%;
+}
+
+.about h1 {
+  font-size: 25px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.about p {
+  margin-bottom: 10px;
+}
+
+.about button {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 2px 6px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 83px;
+  height: 40px;
+  margin-bottom: 25px;
+}
